@@ -1,22 +1,21 @@
-const { users } = require('../../models');
-console.log(users)
+const { users } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
     const result = await users.findOne({
       where: {
         email,
-        password
-      }
-    })
+        password,
+      },
+    });
     if (result) {
       req.session.userId = result.id;
       res.status(200).send({
-        id: req.session.userId
-      })
+        id: req.session.userId,
+      });
     } else {
       res.status(401).send("Invalid user");
     }
-  }
+  },
 };

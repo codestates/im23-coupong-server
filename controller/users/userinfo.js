@@ -1,18 +1,16 @@
-const { users } = require('../../models');
+const { users } = require("../../models");
 
 module.exports = {
   get: async (req, res) => {
-    const session = req.session.userId
-    if (session) {
+    if (req.session.userId) {
       const result = await users.findOne({
-        where : {
-          id : session
-        }
-      })
-      res.status(200).send(result)
+        where: {
+          id: req.session.userId,
+        },
+      });
+      res.status(200).send(result);
     } else {
-      res.status(404).send("not existing user")
-      res.end();
+      res.status(404).send("not existing user");
     }
-  }
+  },
 };
