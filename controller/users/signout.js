@@ -1,8 +1,10 @@
-const session = require("express-session");
-
 module.exports = {
   post: async (req, res) => {
-    await req.session.destroy();
-    res.redirect('/');
-  }
+    if (req.session.userId) {
+      await req.session.destroy();
+      res.redirect("/");
+    } else {
+      res.redirect("/");
+    }
+  },
 };

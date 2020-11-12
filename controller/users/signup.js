@@ -1,19 +1,22 @@
-const { users } = require('../../models');
+const { users } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
-    const body = req.body
+    const { email, password, username } = req.body;
+
     const [result, created] = await users.findOrCreate({
-      where : {
-        email: body.email,
-        username: body.username,
-        password: body.password
-      }
+      where: {
+        email: email,
+      },
+      defaults: {
+        password: password,
+        username: username,
+      },
     });
     if (!created) {
-      res.status(409).send("already existing user")
+      res.status(409).send("already existing user");
     } else {
-      res.status(200).send(result)
+      res.status(200).send(result);
     }
-  }
+  },
 };
