@@ -4,6 +4,8 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 
+const usersRouter = require('./routes/users');
+
 const app = express();
 const port = 3001;
 
@@ -36,6 +38,8 @@ app.use(
 app.get("/", (req, res) => {
   res.status(200).send("Hello Coupong!");
 });
+
+app.use('/users', usersRouter);
 
 app.set("port", port);
 app.listen(port, () => {
