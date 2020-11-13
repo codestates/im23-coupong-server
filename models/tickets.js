@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.tickets.belongsToMany(models.users, {
+			tickets.belongsToMany(models.users, {
         through: models.users_tickets,
-        foreignKey: "ticket_id",
-        onDelete: "CASCADE",
-      });
+        foreignKey: 'ticket_id',
+        onDelete: 'CASCADE'
+   });
     }
   }
   tickets.init(
