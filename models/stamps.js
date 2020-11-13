@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     number: DataTypes.STRING,
     count: DataTypes.INTEGER,
   });
-  stamps.belongsToMany(users, { through: "users_stamps" });
+  stamps.associate = function (models) {
+    stamps.belongsToMany(models.users, { through: "users_stamps" });
+  };
   return stamps;
 };
