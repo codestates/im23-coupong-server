@@ -11,9 +11,7 @@ module.exports = {
     });
     if (result) {
       req.session.userId = result.id;
-      res.status(200).send({
-        id: req.session.userId,
-      });
+      res.status(200).send(result);
     } else {
       res.status(401).send("Invalid user");
     }
