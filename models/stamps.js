@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      stamps.belongsToMany(models.users, {
+        through: models.users_stamps,
+        foreignKey: "stamps_id",
+        onDelete: "CASCADE",
+      });
     }
   }
   stamps.init(
