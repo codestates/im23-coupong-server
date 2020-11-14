@@ -11,7 +11,11 @@ module.exports = {
     });
     if (result) {
       req.session.userId = result.id;
-      res.status(200).send(result);
+      let userInfo = {
+        email: result.email,
+        username: result.username,
+      };
+      res.status(200).send(userInfo);
     } else {
       res.status(401).send("Invalid user");
     }
