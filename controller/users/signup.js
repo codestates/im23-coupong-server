@@ -16,7 +16,11 @@ module.exports = {
     if (!created) {
       res.status(409).send("already existing user");
     } else {
-      res.status(200).send(result);
+      let userInfo = {
+        email: result.email,
+        username: result.username,
+      };
+      res.status(200).send(userInfo);
     }
   },
 };
