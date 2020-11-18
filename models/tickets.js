@@ -1,15 +1,28 @@
 "use strict";
 
-const users = require("./users");
-
 module.exports = (sequelize, DataTypes) => {
   const tickets = sequelize.define("tickets", {
-    name: DataTypes.STRING,
-    number: DataTypes.STRING,
-    count: DataTypes.INTEGER,
+    title: DataTypes.STRING,
+    curNum: DataTypes.INTEGER,
+    maxNum: DataTypes.INTEGER,
+    is_used: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    start_date: DataTypes.STRING,
+    end_date: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "users",
+        key: "id",
+      },
+    },
+    tickets_group_id: DataTypes.INTEGER,
   });
   tickets.associate = function (models) {
-    tickets.belongsToMany(models.users, { through: "users_tickets" });
+    tickets.belongsTo(models.users);
   };
   return tickets;
 };
