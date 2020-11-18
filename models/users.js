@@ -30,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   users.associate = function (models) {
     users.hasMany(models.stamps);
-  };
-  users.associate = function (models) {
     users.hasMany(models.tickets);
   };
   return users;
