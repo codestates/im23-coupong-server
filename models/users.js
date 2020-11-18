@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       username: DataTypes.STRING,
       password: DataTypes.STRING,
+      birth: DataTypes.STRING,
     },
     {
       hooks: {
@@ -28,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   users.associate = function (models) {
-    users.belongsToMany(models.stamps, { through: "users_stamps" });
+    users.hasMany(models.stamps);
   };
   users.associate = function (models) {
-    users.belongsToMany(models.tickets, { through: "users_tickets" });
+    users.hasMany(models.tickets);
   };
   return users;
 };
