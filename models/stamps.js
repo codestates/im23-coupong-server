@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
   stamps.associate = function (models) {
-    stamps.belongsTo(models.users);
+    stamps.belongsTo(models.users, { foreignKey: "user_id" });
   };
   return stamps;
 };
