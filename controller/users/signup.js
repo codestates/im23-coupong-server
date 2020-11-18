@@ -19,6 +19,7 @@ module.exports = {
       let userInfo = {
         email: result.email,
         username: result.username,
+        user_id: result.id
       };
       res.status(200).send(userInfo);
     }

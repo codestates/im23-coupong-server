@@ -13,7 +13,7 @@ const port = 3001;
 
 app.use(
   session({
-    secret: "@coupong",
+    secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
   })
@@ -32,7 +32,7 @@ app.use(
 app.use(
   cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "OPTION", "PUT", "DELETE"],
     credentials: true,
   })
 );
