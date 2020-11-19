@@ -2,21 +2,24 @@ const { users } = require("../../models");
 
 module.exports = {
   delete: async (req, res) => {
-    const { email, password } = req.body;
-    const result = await users.destroy({
-      where: {
-        email,
-        password
+    try {
+      const result = await users.destroy({
+            where: {
+              id: req.session.userid,
+            },
+          })
+      if (result) {
+        await req.session.destroy((err) => {
+          if (err) {
+            res.status(404).send("invalid user");
+          } else {
+            res.status(200).send("Withdrawal completed");
+            res.redirect("/");
+          }
+        });
       }
-    })
-    if (result) {
-      result.destroy({
-        truncate: true
-      })
-        res.status(200).send(result)
-        res.redirect("/");
-    } else {
-        res.status(500).send('Failure to withdraw')
+    } catch(err) {
+      res.status(500).send('err')
     }
   },
 };
