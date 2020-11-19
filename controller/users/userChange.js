@@ -1,27 +1,30 @@
 const { users } = require("../../models");
 
 module.exports = {
-    put: async (req, res) => {
+  put: async (req, res) => {
     const { email, username, birth, password } = req.body;
-
-    const result = await users.findOne({
+    const { user_id } = req.params;
+    try {
+      const result = await users.update({
+        email: email,
+        username: username,
+        birth: birth,
+        password: password
+      }, {
         where: {
-            email,
-            username,
-            birth,
-            password
-        }
-    })
-    if (result) {
-        result.update({
-            email: result.email,
-            username: result.username,
-            birth: result.birth,
-            password: result.password
-        })
-        res.status(200).send("성공")
-    } else {
-        res.status(500).send("Failure to userinfo")
+          id: user_id
+        }})
+      if (result) {
+        await req.session.update((err) => {
+          if (err) {
+            res.status(200).send("성공")
+          } else {
+            res.status(404).send("Failure to userinfo")
+          }
+        });
+      }
+    } catch(err) {
+      res.status(500).send('err')
     }
-    }
+  }
 };
