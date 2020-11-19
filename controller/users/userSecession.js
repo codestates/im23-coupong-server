@@ -2,12 +2,13 @@ const { users } = require("../../models");
 
 module.exports = {
   delete: async (req, res) => {
+    const { user_id } = req.params;
     try {
       const result = await users.destroy({
-            where: {
-              id: req.session.userid,
-            },
-          })
+        where: {
+          id: user_id
+        },
+      })
       if (result) {
         await req.session.destroy((err) => {
           if (err) {
