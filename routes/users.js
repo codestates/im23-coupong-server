@@ -15,10 +15,10 @@ router.post("/signup", usersController.signup.post);
 // * GET /users/userinfo
 router.get("/userinfo", usersController.userinfo.get);
 
-// * DELETE /users/userSecession
-router.delete("/userSecession", usersController.userSecession.delete);
+// * DELETE /users/userSecession/:user_id
+router.delete("/userSecession/:user_id", usersController.userSecession.delete);
 
-// * PUT /users/userChange
-router.put("/userChange", usersController.userChange.put);
+// * PUT /users/userChange/:user_id
+router.put("/userChange/:user_id", usersController.userChange.put);
 
 module.exports = router;
