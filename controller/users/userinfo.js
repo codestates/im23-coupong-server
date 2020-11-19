@@ -9,10 +9,10 @@ module.exports = {
         },
       });
       let userInfo = {
-        email: result.email,
-        username: result.username,
+        email: result.dataValues.email,
+        username: result.dataValues.username,
         birth: result.birth,
-        user_id: result.id
+        user_id: result.dataValues.id
       };
       res.status(200).send(userInfo);
     } else {
