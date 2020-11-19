@@ -15,7 +15,6 @@ module.exports = {
             res.status(404).send("invalid user");
           } else {
             res.status(200).send("Withdrawal completed");
-            res.redirect("/");
           }
         });
       }
