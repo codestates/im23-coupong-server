@@ -15,13 +15,9 @@ module.exports = {
           id: user_id
         }})
       if (result) {
-        await req.session.update((err) => {
-          if (err) {
-            res.status(200).send("성공")
-          } else {
-            res.status(404).send("Failure to userinfo")
-          }
-        });
+        res.status(200).send("Success")
+      } else {
+        res.status(404).send("Failure to userinfo")
       }
     } catch(err) {
       res.status(500).send('err')
