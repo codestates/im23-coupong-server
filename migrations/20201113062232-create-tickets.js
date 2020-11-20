@@ -30,11 +30,13 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
+        onDelete: 'CASCADE',
         references: {
           model: {
             tableName: "users",
+            key: "id",
           },
-          key: "id",
         },
       },
       tickets_group_id: {
