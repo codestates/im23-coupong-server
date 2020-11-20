@@ -21,8 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     tickets_group_id: DataTypes.INTEGER,
   });
-  tickets.associate = function (models) {
-    tickets.belongsTo(models.users, { foreignKey: "user_id" });
-  };
+    tickets.associate = function (models) {
+      tickets.belongsTo(models.users, { 
+        foreignKey: { name : "user_id", allowNull: true },
+        onDelete: 'CASCADE'
+    });
+  }
   return tickets;
 };
